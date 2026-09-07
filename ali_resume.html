@@ -1,0 +1,1300 @@
+<title>Ali Ismail</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ─── TOKENS (dark default) ─────────────────────────────────── */
+:root {
+  --bg:        #07111D;
+  --surf:      #0C1A2A;
+  --surf2:     #112032;
+  --border:    #1A2E44;
+  --text:      #C8D8EB;
+  --muted:     #527090;
+  --dim:       #2B3F55;
+  --accent:    #22D3EE;
+  --warm:      #FB923C;
+  --glow:      rgba(34,211,238,.13);
+  --nav-bg:    rgba(7,17,29,.88);
+
+  --ff-h:   'Syne', system-ui, sans-serif;
+  --ff-b:   'IBM Plex Sans', system-ui, sans-serif;
+  --ff-m:   'JetBrains Mono', monospace;
+  --r:      6px;
+}
+
+/* light — system */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg:      #EFF3F8;
+    --surf:    #FFFFFF;
+    --surf2:   #F3F7FC;
+    --border:  #C5D4E4;
+    --text:    #0A1929;
+    --muted:   #4A6275;
+    --dim:     #A8BCCE;
+    --accent:  #0891B2;
+    --warm:    #EA6C10;
+    --glow:    rgba(8,145,178,.10);
+    --nav-bg:  rgba(239,243,248,.92);
+  }
+}
+/* light — explicit */
+:root[data-theme="light"] {
+  --bg:      #EFF3F8;
+  --surf:    #FFFFFF;
+  --surf2:   #F3F7FC;
+  --border:  #C5D4E4;
+  --text:    #0A1929;
+  --muted:   #4A6275;
+  --dim:     #A8BCCE;
+  --accent:  #0891B2;
+  --warm:    #EA6C10;
+  --glow:    rgba(8,145,178,.10);
+  --nav-bg:  rgba(239,243,248,.92);
+}
+/* dark — explicit */
+:root[data-theme="dark"] {
+  --bg:      #07111D;
+  --surf:    #0C1A2A;
+  --surf2:   #112032;
+  --border:  #1A2E44;
+  --text:    #C8D8EB;
+  --muted:   #527090;
+  --dim:     #2B3F55;
+  --accent:  #22D3EE;
+  --warm:    #FB923C;
+  --glow:    rgba(34,211,238,.13);
+  --nav-bg:  rgba(7,17,29,.88);
+}
+
+/* ─── RESET ─────────────────────────────────────────────────── */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+
+body {
+  font-family: var(--ff-b);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ─── SIDEBAR NAV ───────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 200px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 1.75rem;
+  border-right: 1px solid var(--border);
+  background: var(--nav-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.nav-logo {
+  font-family: var(--ff-h);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -.03em;
+  color: var(--accent);
+  text-decoration: none !important;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: 3rem;
+}
+.nav-logo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--warm); flex-shrink: 0; }
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  list-style: none;
+  flex: 1;
+}
+.nav-links a {
+  font-family: var(--ff-m);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color .2s, padding-left .2s;
+  text-decoration: none;
+  padding: .45rem 0;
+  display: block;
+  border-left: 2px solid transparent;
+  padding-left: .75rem;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--text);
+  border-left-color: var(--accent);
+}
+
+.theme-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 4px;
+  width: 30px; height: 30px;
+  cursor: pointer;
+  font-size: .85rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .2s, color .2s;
+  margin-top: auto;
+  align-self: flex-start;
+}
+.theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+.theme-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* push page content right of sidebar */
+body { padding-left: 200px; }
+
+/* ─── HERO ──────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 5rem);
+  padding: 4rem clamp(1.25rem, 4vw, 3rem) 2.5rem;
+  max-width: 1320px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* dot-grid texture */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--dim) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: .4;
+  pointer-events: none;
+}
+
+/* ambient glow */
+.hero-glow {
+  position: absolute;
+  top: -15%; left: -10%;
+  width: 65vw; height: 65vw;
+  background: radial-gradient(ellipse, var(--glow) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-left, .hero-right { position: relative; z-index: 1; }
+
+/* monogram */
+.monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px; height: 52px;
+  border: 1.5px solid var(--accent);
+  border-radius: 8px;
+  font-family: var(--ff-h);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -.02em;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 24px var(--glow), inset 0 0 12px var(--glow);
+}
+
+.hero-name {
+  font-family: var(--ff-h);
+  font-size: clamp(3rem, 5.5vw, 5.25rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -.05em;
+  text-wrap: balance;
+  margin-bottom: .6rem;
+}
+
+.hero-role {
+  font-family: var(--ff-m);
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.hero-tagline {
+  font-size: 1.05rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  min-height: 2.1em;
+}
+.cursor {
+  display: inline-block;
+  width: 2px; height: 1em;
+  background: var(--accent);
+  vertical-align: text-bottom;
+  margin-left: 1px;
+  animation: blink .85s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem .75rem;
+  font-family: var(--ff-m);
+  font-size: .7rem;
+  color: var(--muted);
+  margin-bottom: 2.25rem;
+}
+.sep { color: var(--dim); }
+
+.hero-stats {
+  display: flex;
+  gap: 2.25rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+.stat-num {
+  font-family: var(--ff-h);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -.04em;
+  display: block;
+}
+.stat-label {
+  font-family: var(--ff-m);
+  font-size: .65rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-top: .3rem;
+  display: block;
+}
+
+.hero-actions {
+  display: flex;
+  gap: .875rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .625rem 1.375rem;
+  background: var(--accent);
+  color: #07111D;
+  border: none;
+  border-radius: var(--r);
+  font-family: var(--ff-h);
+  font-weight: 700;
+  font-size: .875rem;
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: filter .2s, transform .15s;
+  line-height: 1;
+}
+.btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .625rem 1.375rem;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  font-family: var(--ff-h);
+  font-weight: 600;
+  font-size: .875rem;
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: border-color .2s, color .2s;
+  line-height: 1;
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn-download { border-color: var(--accent); color: var(--accent); }
+.btn-download:hover { background: var(--glow); }
+
+/* ─── TERMINAL ──────────────────────────────────────────────── */
+.terminal {
+  background: var(--surf);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,.35);
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .7rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surf2);
+}
+.tb { width: 10px; height: 10px; border-radius: 50%; }
+.tb-r { background:#FF5F57; }
+.tb-y { background:#FEBC2E; }
+.tb-g { background:#28C840; }
+.term-ttl {
+  font-family: var(--ff-m);
+  font-size: .68rem;
+  color: var(--muted);
+  margin-left: .5rem;
+  letter-spacing: .04em;
+}
+
+.term-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+  font-family: var(--ff-m);
+  font-size: .78rem;
+  line-height: 1.75;
+  min-height: 400px;
+  overflow-y: auto;
+}
+
+.tc   { color: var(--text); }
+.tp   { color: var(--accent); }
+.tk   { color: var(--accent); min-width: 7ch; display: inline-block; }
+.tv   { color: var(--muted); }
+.tok  { color: #4ADE80; }
+.tcmt { color: var(--dim); font-style: italic; }
+.trow { display: flex; gap: .75rem; }
+
+/* ─── SHARED SECTION CHROME ─────────────────────────────────── */
+.wrap {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 3.5rem clamp(1.25rem, 4vw, 3rem);
+}
+
+.section-eye {
+  font-family: var(--ff-m);
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .65rem;
+}
+.section-h {
+  font-family: var(--ff-h);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+  line-height: 1.1;
+  margin-bottom: 2.25rem;
+}
+
+.rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--border) 40%, transparent 100%);
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+  /* use a pseudo element to avoid padding issue */
+  position: relative;
+}
+.rule::after {
+  content: '';
+  position: absolute;
+  inset: 0 clamp(1.25rem, 4vw, 3rem);
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--border) 35%, transparent 100%);
+}
+
+/* ─── TIMELINE ──────────────────────────────────────────────── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 160px;
+  top: 8px;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent) 0%, var(--border) 20%, var(--border) 85%, transparent 100%);
+}
+
+.tl-entry {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  padding-bottom: 3.5rem;
+  position: relative;
+}
+
+.tl-meta {
+  padding-right: 2rem;
+  padding-top: 2px;
+  text-align: right;
+}
+.tl-co {
+  font-family: var(--ff-h);
+  font-size: .925rem;
+  font-weight: 700;
+  color: var(--text);
+  display: block;
+  margin-bottom: .25rem;
+}
+.tl-loc {
+  font-family: var(--ff-m);
+  font-size: .65rem;
+  color: var(--dim);
+  display: block;
+  margin-bottom: .15rem;
+  letter-spacing: .04em;
+}
+.tl-period {
+  font-family: var(--ff-m);
+  font-size: .65rem;
+  color: var(--muted);
+  letter-spacing: .04em;
+}
+
+.tl-node {
+  position: absolute;
+  left: 160px;
+  top: 8px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px var(--glow);
+  z-index: 1;
+}
+
+.tl-content {
+  padding-left: .5rem;
+}
+
+.role-block {
+  margin-bottom: 2rem;
+}
+.role-block:last-child { margin-bottom: 0; }
+
+.role-title {
+  font-family: var(--ff-h);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .15rem;
+}
+.role-sub {
+  font-family: var(--ff-b);
+  font-size: .825rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: .7rem;
+}
+
+.bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+.bullets li {
+  font-size: .875rem;
+  color: var(--muted);
+  padding-left: 1.1rem;
+  position: relative;
+  line-height: 1.55;
+}
+.bullets li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.bullets strong { color: var(--text); font-weight: 500; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: .75rem;
+}
+.tag {
+  font-family: var(--ff-m);
+  font-size: .6rem;
+  font-weight: 500;
+  padding: .2rem .55rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--dim);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* ─── COMPACT EARLIER ───────────────────────────────────────── */
+.earlier {
+  display: flex;
+  flex-direction: column;
+}
+.prev-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0 2rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--border);
+}
+.prev-meta { text-align: right; padding-right: 2rem; padding-top: 2px; }
+.prev-co {
+  font-family: var(--ff-h);
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--text);
+  display: block;
+}
+.prev-period {
+  font-family: var(--ff-m);
+  font-size: .63rem;
+  color: var(--muted);
+  display: block;
+  margin-top: .15rem;
+  letter-spacing: .04em;
+}
+.prev-title {
+  font-family: var(--ff-h);
+  font-size: .875rem;
+  font-weight: 700;
+  margin-bottom: .25rem;
+  color: var(--text);
+}
+.prev-desc {
+  font-size: .825rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ─── EDUCATION ─────────────────────────────────────────────── */
+.edu-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--surf);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  max-width: 600px;
+}
+.edu-mark {
+  width: 42px; height: 42px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--surf2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--ff-h);
+  font-size: .8rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -.02em;
+}
+.edu-deg {
+  font-family: var(--ff-h);
+  font-size: .95rem;
+  font-weight: 700;
+  margin-bottom: .2rem;
+  color: var(--text);
+}
+.edu-school { font-size: .85rem; color: var(--muted); margin-bottom: .15rem; }
+.edu-detail {
+  font-family: var(--ff-m);
+  font-size: .65rem;
+  color: var(--dim);
+  letter-spacing: .04em;
+}
+
+/* ─── FOOTER ────────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem clamp(1.25rem, 4vw, 3rem);
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.foot-name {
+  font-family: var(--ff-h);
+  font-weight: 700;
+  font-size: .875rem;
+  color: var(--muted);
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  max-width: 780px;
+}
+.contact-item {
+  background: var(--surf);
+  padding: 1.75rem 2rem;
+  text-decoration: none;
+  display: block;
+  transition: background .2s;
+}
+.contact-item:hover { background: var(--surf2); text-decoration: none; }
+.contact-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.contact-lbl {
+  font-family: var(--ff-m);
+  font-size: .63rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .6rem;
+  display: block;
+}
+.contact-val {
+  font-family: var(--ff-h);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text);
+  display: block;
+  line-height: 1.3;
+}
+.contact-arrow {
+  font-size: .75rem;
+  color: var(--accent);
+  margin-top: .5rem;
+  display: block;
+  font-family: var(--ff-m);
+  transition: transform .2s;
+}
+.contact-item:hover .contact-arrow { transform: translateX(3px); }
+
+/* minimal footer */
+.page-foot {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem clamp(1.25rem, 4vw, 3rem);
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.foot-name {
+  font-family: var(--ff-h);
+  font-weight: 700;
+  font-size: .875rem;
+  color: var(--muted);
+}
+.foot-copy {
+  font-family: var(--ff-m);
+  font-size: .65rem;
+  color: var(--dim);
+  letter-spacing: .04em;
+}
+
+@media (max-width: 600px) {
+  .contact-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── SCROLL REVEAL ─────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* ─── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  body { padding-left: 0; padding-top: 56px; }
+
+  nav {
+    top: 0; left: 0; right: 0; bottom: auto;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 1.25rem;
+    height: 56px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { margin-bottom: 0; }
+  .nav-links { flex-direction: row; gap: 1rem; }
+  .nav-links a { padding: 0; border-left: none; border-bottom: 2px solid transparent; }
+  .nav-links a:hover, .nav-links a.active { border-left-color: transparent; border-bottom-color: var(--accent); }
+  .theme-btn { margin-top: 0; margin-left: auto; }
+
+  .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 3rem; }
+  .hero-right { display: none; }
+
+  .timeline::before { left: 0; }
+  .tl-entry { grid-template-columns: 1fr; padding-left: 1.5rem; }
+  .tl-meta { text-align: left; padding-right: 0; margin-bottom: .5rem; }
+  .tl-node { left: 0; }
+
+  .prev-row { grid-template-columns: 1fr; }
+  .prev-meta { text-align: left; padding-right: 0; margin-bottom: .35rem; }
+
+  .page-foot { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .cursor { animation: none; }
+}
+
+
+/* ─── PRINT / PDF ───────────────────────────────────────────── */
+@media print {
+  /* Force light palette regardless of theme */
+  :root, :root[data-theme="dark"] {
+    --bg:     #ffffff;
+    --surf:   #ffffff;
+    --surf2:  #f5f7fa;
+    --border: #d0d9e6;
+    --text:   #0a1929;
+    --muted:  #4a6275;
+    --dim:    #8fa3b8;
+    --accent: #0070a0;
+    --warm:   #c05a10;
+    --glow:   transparent;
+  }
+
+  @page { size: A4; margin: 1.4cm 1.8cm; }
+
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  body {
+    padding-left: 0 !important;
+    background: #fff !important;
+    color: #0a1929 !important;
+    font-size: 9.5pt;
+  }
+
+  /* Hide interactive / decorative chrome */
+  nav,
+  .hero-glow,
+  .hero-right,
+  .cursor,
+  .hero-actions .btn-ghost,
+  .tags,
+  .rule,
+  .page-foot,
+  .pdf-btn,
+  .theme-btn,
+  .contact-arrow { display: none !important; }
+
+  /* Kill dot grid & glow on hero */
+  .hero::before { display: none; }
+
+  /* Hero — single column, compact */
+  .hero {
+    display: block !important;
+    min-height: auto !important;
+    padding: 0 0 1.5rem !important;
+    border-bottom: 1.5px solid #0070a0;
+    margin-bottom: 1.25rem;
+  }
+  .monogram { display: none; }
+  .hero-name { font-size: 22pt !important; margin-bottom: .2rem; }
+  .hero-role { font-size: 7.5pt !important; margin-bottom: .6rem; }
+  .hero-tagline { display: none; }
+  .hero-meta { font-size: 7pt !important; margin-bottom: .75rem; }
+  .hero-stats { gap: 1.5rem !important; margin-bottom: .75rem; }
+  .stat-num { font-size: 14pt !important; }
+  .stat-label { font-size: 6pt !important; }
+  .btn-primary {
+    background: none !important;
+    color: #0070a0 !important;
+    border: 1px solid #0070a0 !important;
+    padding: .3rem .8rem !important;
+    font-size: 7.5pt !important;
+  }
+
+  /* Section chrome */
+  .wrap { padding: 1rem 0 !important; }
+  .section-eye { font-size: 6pt !important; letter-spacing: .18em; margin-bottom: .3rem; }
+  .section-h { font-size: 13pt !important; margin-bottom: 1.25rem !important; }
+
+  /* Timeline */
+  .timeline::before { background: #0070a0; }
+  .tl-entry {
+    grid-template-columns: 130px 1fr !important;
+    padding-bottom: 1.5rem !important;
+    page-break-inside: avoid;
+  }
+  .tl-co { font-size: 8pt !important; }
+  .tl-period, .tl-loc { font-size: 6.5pt !important; }
+  .tl-node { box-shadow: none !important; }
+  .role-title { font-size: 9pt !important; }
+  .role-sub { font-size: 7.5pt !important; margin-bottom: .4rem !important; }
+  .bullets li { font-size: 8pt !important; line-height: 1.45 !important; gap: .2rem; }
+  .role-block { margin-bottom: 1rem !important; page-break-inside: avoid; }
+
+  /* Earlier */
+  .earlier { page-break-inside: avoid; }
+  .prev-row {
+    grid-template-columns: 130px 1fr !important;
+    padding: .6rem 0 !important;
+    page-break-inside: avoid;
+  }
+  .prev-co { font-size: 8pt !important; }
+  .prev-period { font-size: 6.5pt !important; }
+  .prev-title { font-size: 8.5pt !important; }
+  .prev-desc { font-size: 7.5pt !important; }
+
+  /* Education */
+  .edu-card { border: none !important; padding: 0 !important; gap: 1rem !important; }
+  .edu-mark { border: 1px solid #d0d9e6 !important; box-shadow: none !important; }
+  .edu-deg { font-size: 9pt !important; }
+  .edu-school, .edu-detail { font-size: 7.5pt !important; }
+
+  /* Contact — inline row instead of grid */
+  .contact-grid {
+    display: flex !important;
+    gap: 2rem !important;
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+  .contact-item {
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+  }
+  .contact-lbl { font-size: 6pt !important; margin-bottom: .2rem !important; }
+  .contact-val { font-size: 8.5pt !important; }
+
+  /* Section dividers between print sections */
+  .wrap + .wrap { border-top: 1px solid #d0d9e6; }
+}
+</style>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#top" class="nav-logo" aria-label="Ali Ismail home">
+    A·I <span class="nav-logo-dot" aria-hidden="true"></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#earlier">Earlier</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="theme-btn" id="theme-btn" aria-label="Toggle colour theme">◑</button>
+
+</nav>
+
+<!-- HERO -->
+<div id="top"></div>
+<section class="hero" aria-label="Introduction">
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <div class="hero-left">
+    <div class="monogram" aria-label="Initials A·I">A·I</div>
+    <h1 class="hero-name">Ali Ismail</h1>
+    <p class="hero-role">Engineering Manager · Payments &amp; Developer Platform</p>
+    <p class="hero-tagline" aria-live="polite">
+      <span id="typed"></span><span class="cursor" aria-hidden="true"></span>
+    </p>
+    <div class="hero-meta">
+      <span>Almere, Netherlands</span>
+      <span class="sep" aria-hidden="true">·</span>
+      <span>Dutch national</span>
+      <span class="sep" aria-hidden="true">·</span>
+      <a href="mailto:eng.ali.cs@gmail.com">eng.ali.cs@gmail.com</a>
+    </div>
+    <div class="hero-stats" role="list" aria-label="Career statistics">
+      <div role="listitem">
+        <span class="stat-num">15+</span>
+        <span class="stat-label">years in tech</span>
+      </div>
+      <div role="listitem">
+        <span class="stat-num">3</span>
+        <span class="stat-label">global orgs</span>
+      </div>
+      <div role="listitem">
+        <span class="stat-num">19</span>
+        <span class="stat-label">direct reports</span>
+      </div>
+      <div role="listitem">
+        <span class="stat-num">203</span>
+        <span class="stat-label">countries served</span>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="mailto:eng.ali.cs@gmail.com" class="btn-primary">Get in touch</a>
+      <a href="https://www.linkedin.com/in/ali-ismail-78632a5b/" class="btn-ghost" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="./Ali_Ismail_Resume_Mngr.pdf" download="Ali_Ismail_Resume_Mngr.pdf" class="btn-ghost btn-download" aria-label="Download PDF resume">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M5 7l3 3 3-3"/><rect x="2" y="11" width="12" height="3" rx="1"/></svg>
+        PDF
+      </a>
+    </div>
+  </div>
+
+  <!-- TERMINAL (decorative) -->
+  <div class="hero-right" aria-hidden="true">
+    <div class="terminal" role="presentation">
+      <div class="term-bar">
+        <div class="tb tb-r"></div>
+        <div class="tb tb-y"></div>
+        <div class="tb tb-g"></div>
+        <span class="term-ttl">career — zsh</span>
+      </div>
+      <div class="term-body" id="term-body"></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule" role="separator"></div>
+
+<!-- EXPERIENCE -->
+<section class="wrap" id="experience" aria-label="Work experience">
+  <p class="section-eye">Work History</p>
+  <h2 class="section-h">Experience</h2>
+
+  <div class="timeline">
+
+    <!-- UBER -->
+    <article class="tl-entry reveal">
+      <div class="tl-meta">
+        <span class="tl-co">Uber</span>
+        <span class="tl-loc">Netherlands</span>
+        <span class="tl-period">Jan 2025 – Present</span>
+      </div>
+      <div class="tl-node" aria-hidden="true"></div>
+      <div class="tl-content">
+        <div class="role-block">
+          <h3 class="role-title">Engineering Manager II</h3>
+          <p class="role-sub">Payment Experience</p>
+          <ul class="bullets">
+            <li>Lead <strong>13 direct reports</strong> owning the core checkout orchestration layer — every charge across Rides, Eats, Delivery, and U4B routes to Risk, Compliance, and Ledger through this system on Web, iOS, and Android.</li>
+            <li>Lead a team of <strong>6 engineers</strong> architecting a ground-up rewrite of Uber's native mobile payments framework, replacing a decade-old million-line legacy system.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Payments</span>
+            <span class="tag">iOS</span>
+            <span class="tag">Android</span>
+            <span class="tag">Platform Arch</span>
+          </div>
+        </div>
+        <div class="role-block">
+          <h3 class="role-title">Engineering Manager II</h3>
+          <p class="role-sub">Developer Platform</p>
+          <ul class="bullets">
+            <li>Led platform teams in standardizing Uber's <strong>product development lifecycle</strong>, driving end-to-end alignment across engineering planning, launch governance, and post-production reliability.</li>
+            <li>Owned domain strategy for <strong>feature liveness and operational signal pipelines</strong>, establishing quality, observability, and operational readiness standards to ensure reliable global launches across all engineering teams.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Developer Platform</span>
+            <span class="tag">Observability</span>
+            <span class="tag">Launch Governance</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- AMAZON -->
+    <article class="tl-entry reveal">
+      <div class="tl-meta">
+        <span class="tl-co">Amazon</span>
+        <span class="tl-loc">Netherlands</span>
+        <span class="tl-period">Jan 2022 – Dec 2024</span>
+      </div>
+      <div class="tl-node" aria-hidden="true"></div>
+      <div class="tl-content">
+        <div class="role-block">
+          <h3 class="role-title">Software Development Manager</h3>
+          <p class="role-sub">Amazon Web Services</p>
+          <ul class="bullets">
+            <li>Managed core developer productivity products — <strong>AWS Cloud9, Kiro, CodeCatalyst IDE widgets</strong>, and CloudEditor across all AWS Consoles, used by millions of developers worldwide.</li>
+            <li>Led initiatives integrating <strong>AI-assisted development capabilities</strong> into the AWS developer lifecycle.</li>
+            <li>Drove improvements in developer experience, reliability, and extensibility across high-traffic cloud products.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Cloud9</span>
+            <span class="tag">Kiro</span>
+            <span class="tag">AI Dev Tooling</span>
+            <span class="tag">AWS</span>
+          </div>
+        </div>
+        <div class="role-block">
+          <h3 class="role-title">Software Development Manager</h3>
+          <p class="role-sub">Amazon FinTech</p>
+          <ul class="bullets">
+            <li>Led engineering teams building <strong>financial data and compliance platforms</strong> supporting global tax and accounting regulations.</li>
+            <li>Owned end-to-end data pipelines for Amazon's internal <strong>financial reporting and compliance</strong> (including SAF-T), establishing KPIs for accuracy, completeness, and latency across large-scale data warehouses.</li>
+            <li>Partnered with Finance, Legal, and Compliance stakeholders to deliver <strong>auditable, high-correctness systems</strong> operating at global scale.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">FinTech</span>
+            <span class="tag">Data Pipelines</span>
+            <span class="tag">Compliance</span>
+            <span class="tag">SAF-T</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- BOOKING.COM -->
+    <article class="tl-entry reveal">
+      <div class="tl-meta">
+        <span class="tl-co">Booking.com</span>
+        <span class="tl-loc">Netherlands</span>
+        <span class="tl-period">Apr 2018 – Dec 2021</span>
+      </div>
+      <div class="tl-node" aria-hidden="true"></div>
+      <div class="tl-content">
+        <div class="role-block">
+          <h3 class="role-title">Engineering Manager</h3>
+          <p class="role-sub">Payment Billing Platform</p>
+          <ul class="bullets">
+            <li>Built a <strong>product-agnostic billing engine</strong> handling multi-currency, cross-border invoicing across <strong>~203 countries/territories</strong>, targeting 99.99% financial correctness.</li>
+            <li>Partnered with Product and Finance to ensure billing accuracy, regulatory compliance, and global scalability.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Payments</span>
+            <span class="tag">Billing</span>
+            <span class="tag">Fintech</span>
+          </div>
+        </div>
+        <div class="role-block">
+          <h3 class="role-title">Engineering Manager <span style="font-weight:400;color:var(--muted);font-size:.85em;">(Promoted from Senior Developer)</span></h3>
+          <p class="role-sub">Core Infrastructure Platform</p>
+          <ul class="bullets">
+            <li>Owned core infrastructure platform enabling development and deployment of <strong>800+ containerized microservices</strong> across a hybrid cloud ecosystem integrated with AWS.</li>
+            <li>Led organisation-wide engineering initiatives, including an enterprise Maven-to-Bazel migration, centralized CI/CD pipelines, and SonarQube adoption across <strong>~1,000 projects</strong>.</li>
+            <li>Accelerated developer productivity and autonomy by standardizing Java infrastructure libraries, Kubernetes templates, and Bazel-based monorepo workflows.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Infrastructure</span>
+            <span class="tag">Kubernetes</span>
+            <span class="tag">Bazel</span>
+            <span class="tag">CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="rule" role="separator"></div>
+
+<!-- EARLIER -->
+<section class="wrap" id="earlier" aria-label="Earlier experience">
+  <p class="section-eye">Earlier Career</p>
+  <h2 class="section-h">Previously</h2>
+  <div class="earlier">
+    <div class="prev-row reveal">
+      <div class="prev-meta">
+        <span class="prev-co">CoolGames</span>
+        <span class="prev-period">Apr 2017 – Mar 2018 · NL</span>
+      </div>
+      <div>
+        <p class="prev-title">Senior Java Developer</p>
+        <p class="prev-desc">Developed backend frameworks and microservices for scalable gaming platforms. Stack: Java 8, Play Framework, Akka, AWS, Cassandra, MySQL, Redis, Elasticsearch, ActiveMQ.</p>
+      </div>
+    </div>
+    <div class="prev-row reveal">
+      <div class="prev-meta">
+        <span class="prev-co">Ejada</span>
+        <span class="prev-period">Dec 2009 – Mar 2017 · SA</span>
+      </div>
+      <div>
+        <p class="prev-title">Software Developer &amp; Team Lead</p>
+        <p class="prev-desc">Led development of enterprise-scale systems including airline reservation platforms and government workflow systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule" role="separator"></div>
+
+<!-- EDUCATION -->
+<section class="wrap" id="education" aria-label="Education">
+  <p class="section-eye">Academic</p>
+  <h2 class="section-h">Education</h2>
+  <div class="edu-card reveal">
+    <div class="edu-mark" aria-hidden="true">BSc</div>
+    <div>
+      <p class="edu-deg">BSc Computer Science &amp; Systems Engineering</p>
+      <p class="edu-school">Faculty of Engineering, Alexandria University, Egypt</p>
+      <p class="edu-detail">2003 – 2008 &nbsp;·&nbsp; Graduated with Honours (80%)</p>
+    </div>
+  </div>
+</section>
+
+<div class="rule" role="separator"></div>
+
+<section class="wrap" id="contact" aria-label="Contact">
+  <p class="section-eye">Get in Touch</p>
+  <h2 class="section-h">Contact</h2>
+
+  <div class="contact-grid">
+    <a href="mailto:eng.ali.cs@gmail.com" class="contact-item reveal">
+      <span class="contact-lbl">Email</span>
+      <span class="contact-val">eng.ali.cs@gmail.com</span>
+      <span class="contact-arrow">→</span>
+    </a>
+    <a href="tel:+31645332055" class="contact-item reveal">
+      <span class="contact-lbl">Phone</span>
+      <span class="contact-val">+31 6 45 33 2055</span>
+      <span class="contact-arrow">→</span>
+    </a>
+    <a href="https://www.linkedin.com/in/ali-ismail-78632a5b/" class="contact-item reveal" target="_blank" rel="noopener">
+      <span class="contact-lbl">LinkedIn</span>
+      <span class="contact-val">ali-ismail-78632a5b</span>
+      <span class="contact-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<div class="page-foot">
+  <span class="foot-name">Ali Ismail</span>
+  <span class="foot-copy">Almere, Netherlands · Engineering Manager</span>
+</div>
+
+<script>
+/* ── theme toggle ─────────────────────────────────────────── */
+(function () {
+  const root = document.documentElement;
+  const btn  = document.getElementById('theme-btn');
+  const saved = localStorage.getItem('ali-theme');
+  if (saved) root.setAttribute('data-theme', saved);
+
+  btn.addEventListener('click', () => {
+    const cur  = root.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('ali-theme', next);
+  });
+})();
+
+/* ── sidebar active link ──────────────────────────────────── */
+(function () {
+  const links = document.querySelectorAll('.nav-links a[href^="#"]');
+  const sections = [...links].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+  function update() {
+    let active = sections[0];
+    sections.forEach(s => { if (s.getBoundingClientRect().top <= 120) active = s; });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active.id));
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* ── tagline typewriter ───────────────────────────────────── */
+(function () {
+  const phrases = [
+    'Building teams that ship at scale.',
+    'Engineering leadership × AI-augmented workflows.',
+    'Payments · Developer Platform · Global infrastructure.',
+  ];
+  const el = document.getElementById('typed');
+  let pi = 0, ci = 0, del = false;
+
+  function tick() {
+    const phrase = phrases[pi];
+    if (!del) {
+      el.textContent = phrase.slice(0, ++ci);
+      if (ci === phrase.length) { setTimeout(() => { del = true; tick(); }, 2400); return; }
+    } else {
+      el.textContent = phrase.slice(0, --ci);
+      if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(tick, del ? 30 : 60);
+  }
+  tick();
+})();
+
+/* ── terminal ─────────────────────────────────────────────── */
+(function () {
+  const body = document.getElementById('term-body');
+  if (!body) return;
+
+  /* Each entry: [delay-before-ms, html-string] */
+  const script = [
+    [300,  '<span class="tp">$ ali --profile</span>'],
+    [80,   ''],
+    [60,   '<span class="trow"><span class="tk">  role</span><span class="tv">Engineering Manager II</span></span>'],
+    [60,   '<span class="trow"><span class="tk">  company</span><span class="tv">Uber · Amsterdam</span></span>'],
+    [60,   '<span class="trow"><span class="tk">  teams</span><span class="tv">19 direct reports</span></span>'],
+    [60,   '<span class="trow"><span class="tk">  domains</span><span class="tv">Payments · Dev Platform</span></span>'],
+    [80,   ''],
+    [340,  '<span class="tp">$ career --highlights</span>'],
+    [80,   ''],
+    [70,   '<span class="tok">  ✓  Checkout layer: all Uber Lines of Business</span>'],
+    [70,   '<span class="tok">  ✓  Mobile payments rewrite — 1M+ lines replaced</span>'],
+    [70,   '<span class="tok">  ✓  AWS Cloud9 · Kiro · CodeCatalyst IDEs</span>'],
+    [70,   '<span class="tok">  ✓  SAF-T global compliance @ Amazon FinTech</span>'],
+    [70,   '<span class="tok">  ✓  99.99% billing accuracy @ Booking.com</span>'],
+    [80,   ''],
+    [340,  '<span class="tp">$ ai-tooling --current</span>'],
+    [80,   ''],
+    [60,   '<span class="tv">  claude · cursor · kiro · whisper</span>'],
+    [60,   '<span class="tcmt">  # engineering-augmented leadership</span>'],
+    [80,   ''],
+    [200,  '<span class="tp">$</span>'],
+  ];
+
+  let i = 0;
+  function next() {
+    if (i >= script.length) return;
+    const [delay, html] = script[i++];
+    const div = document.createElement('div');
+    if (html) div.innerHTML = html;
+    else div.style.cssText = 'height:.5rem';
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+    setTimeout(next, delay);
+  }
+  setTimeout(next, 500);
+})();
+
+/* ── scroll reveal ────────────────────────────────────────── */
+(function () {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
